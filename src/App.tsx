@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Counter from './components/Counter';
+import LastFiveNumbers from './components/LastFiveNumbers';
+import IframeSection from './components/IframeSection';
 
-function App() {
+const App: React.FC = () => {
+  const [numbers, setNumbers] = useState<number[]>([]);
+  const [count, setCount] = useState<number>(0);
+
+  const handleNewNumber = (number: number) => {
+    setCount(prevCount => prevCount + number);
+    setNumbers(prevNumbers => {
+      const newNumbers = [number, ...prevNumbers];
+      return newNumbers.length > 5 ? newNumbers.slice(0, 5) : newNumbers;
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="left-section">
+        <LastFiveNumbers numbers={numbers} />
+      </div>
+      <div className="middle-section">
+        <Counter count={count} />
+      </div>
+      <div className="right-section">
+        <IframeSection onMessage={handleNewNumber} />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
