@@ -14,7 +14,7 @@ const LastFiveNumbers: React.FC<LastFiveNumbersProps> = ({ numbers }) => {
       <ul className="horizontal-list">
         {numbers.map((number, index) => (
           <li key={index} style={{ color: colorMap[number] }}>
-            {number}
+            {number}{index < numbers.length - 1 ? ',' : ''}
           </li>
         ))}
       </ul>
