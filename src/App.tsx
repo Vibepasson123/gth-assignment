@@ -18,13 +18,13 @@ const App: React.FC = () => {
 
   return (
     <div className="app">
-      <div className="left-section">
+      <div className="left-section container">
         <LastFiveNumbers numbers={numbers} />
       </div>
-      <div className="middle-section">
+      <div className="middle-section container">
         <Counter count={count} />
       </div>
-      <div className="right-section">
+      <div className="right-section container">
         <IframeSection onMessage={handleNewNumber} />
       </div>
     </div>

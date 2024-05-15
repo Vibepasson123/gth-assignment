@@ -1,16 +1,21 @@
 import React from 'react';
+import { assignColors } from '../utility/randomColors';
 
 interface LastFiveNumbersProps {
   numbers: number[];
 }
 
 const LastFiveNumbers: React.FC<LastFiveNumbersProps> = ({ numbers }) => {
+  const colorMap = assignColors(numbers);
+
   return (
     <div className="last-five-numbers">
       <h2>Last 5 Numbers</h2>
       <ul className="horizontal-list">
         {numbers.map((number, index) => (
-          <li key={index}>{number}</li>
+          <li key={index} style={{ color: colorMap[number] }}>
+            {number}
+          </li>
         ))}
       </ul>
     </div>
